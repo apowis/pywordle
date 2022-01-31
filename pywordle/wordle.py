@@ -14,15 +14,25 @@ class Win(Exception):
     pass
 
 
-def filter_letter(method):
+def filter_grey(method):
     """
     Decorator to stop bad guesses being allowed.
-    Stops grey letters being used and orange letters
-    being used in the wrong place.
+    Stops grey letters being used.
     """
     def inner(ref, position, letter):
         if letter in ref.greys:
             raise GreyLetter("Bad letter guessed")
+        return method(ref, position, letter)
+
+    return inner
+
+
+def filter_orange(method):
+    """
+    Decorator to stop bad guesses being allowed.
+    Stops orange letters being used in the wrong place.
+    """
+    def inner(ref, position, letter):
         if letter in ref.oranges[position]:
             raise OrangeLetter("Orange letter guessed")
         return method(ref, position, letter)
@@ -48,7 +58,8 @@ class Wordle:
             self.check_letter(position, letter)
 
 
-    @filter_letter
+    @filter_orange
+    @filter_grey
     def check_letter(self, position: int, letter: str):
         if letter not in self.answer:  # grey
             self.greys.add(letter)
