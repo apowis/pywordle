@@ -21,6 +21,9 @@ jobs:
 
       - name: Copy indicators to infobloxopen/threat-intelligence
         run: |
+          ls -l
+          pwd
+          ls -l ..
           cp -r pywordle/ ../threat-intelligence/lib/
 
       - name: git add and commit new combined.csv
