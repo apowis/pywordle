@@ -23,7 +23,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           # repository: infobloxopen/threat-intelligence
-          repository: apowis/pylint-issue/
+          repository: apowis/pylint-issue
           path: threat-intelligence
 
       # - name: Copy indicators to infobloxopen/threat-intelligence
