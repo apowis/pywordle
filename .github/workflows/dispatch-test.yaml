@@ -32,12 +32,13 @@ jobs:
           ls -l ..
           cp -r pywordle/ threat-intelligence/lib/
 
-      - name: git add and commit new combined.csv
-        run: |
-          cd threat-intelligence/
-          git switch -c ${{ github.event.inputs.branch_name }}
-          git add lib
-          git commit -m '${{ github.event.inputs.commit_message }}'
-          gh pr create --title "${{ github.event.inputs.commit_message }}" --head "${{ github.event.inputs.branch_name }}" --base main
+      - uses: EndBug/add-and-commit@v9
+        with:
+          message: '${{ github.event.inputs.commit_message }}'
+          add: 'lib'
+          new_branch: ${{ github.event.inputs.branch_name }}
+          cwd: './threat-intelligence/'
+
+      - run: gh pr create --title "${{ github.event.inputs.commit_message }}" --head "${{ github.event.inputs.branch_name }}" --base main
         #   add: indicators/combined.csv
         #   cwd: './threat-intelligence/'
