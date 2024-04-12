@@ -26,7 +26,7 @@ jobs:
           path: threat-intelligence
 
       - name: Copy indicators to infobloxopen/threat-intelligence
-        run: echo 'yay' > temp.txt
+        run: echo 'yay' > threat-intelligence/temp.txt
       #     ls -l
       #     pwd
       #     ls -l ..
