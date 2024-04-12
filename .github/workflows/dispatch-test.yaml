@@ -19,7 +19,7 @@ jobs:
       - name: Checkout this repo into main
         uses: actions/checkout@v4
 
-      - name: Checkout cyberint-databricks
+      - name: Checkout infobloxopen/threat-intelligence
         uses: actions/checkout@v4
         with:
           repository: infobloxopen/threat-intelligence
@@ -39,7 +39,4 @@ jobs:
           new_branch: ${{ github.event.inputs.branch_name }}
           cwd: './threat-intelligence/'
           default_author: user_info
-
-      - run: gh pr create --title "${{ github.event.inputs.commit_message }}" --head "${{ github.event.inputs.branch_name }}" --base main
-        #   add: indicators/combined.csv
-        #   cwd: './threat-intelligence/'
+          push: true
