@@ -2,6 +2,12 @@ name: "PR to infobloxopen/threat-intelligence"
 on:
   workflow_dispatch:
     inputs:
+      pull_request_title:
+        description: "Pull request name for new PR in infobloxopen/threat-intelligence new PR"
+        required: true
+      branch_name:
+        description: "Branch name for new PR in infobloxopen/threat-intelligence new PR"
+        required: true
       commit_message:
         description: "Commmit message to appear in infobloxopen/threat-intelligence new PR"
         required: true
@@ -27,8 +33,11 @@ jobs:
           cp -r pywordle/ threat-intelligence/lib/
 
       - name: git add and commit new combined.csv
-        uses: EndBug/add-and-commit@v9
-        with:
-          message: ${{ github.event.inputs.commit_message }}
-          add: indicators/combined.csv
-          cwd: './threat-intelligence/'
+        run: |
+          cd threat-intelligence/
+          git switch -b ${{ github.event.inputs.branch_name }}
+          git add lib
+          git commit -m '${{ github.event.inputs.commit_message }}'
+          gh pr create --title "${{ github.event.inputs.commit_message }}" --head "${{ github.event.inputs.branch_name }}" --base main
+        #   add: indicators/combined.csv
+        #   cwd: './threat-intelligence/'
