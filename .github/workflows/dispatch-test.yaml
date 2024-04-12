@@ -38,6 +38,7 @@ jobs:
           add: 'lib'
           new_branch: ${{ github.event.inputs.branch_name }}
           cwd: './threat-intelligence/'
+          default_author: user_info
 
       - run: gh pr create --title "${{ github.event.inputs.commit_message }}" --head "${{ github.event.inputs.branch_name }}" --base main
         #   add: indicators/combined.csv
