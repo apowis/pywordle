@@ -1,0 +1,31 @@
+name: "PR to infobloxopen/threat-intelligence"
+on:
+  workflow_dispatch:
+    inputs:
+      commit_message:
+        description: "Commmit message to appear in infobloxopen/threat-intelligence new PR"
+        required: true
+
+jobs:
+  pr-to-threat-intel:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout this repo into main
+        uses: actions/checkout@v4
+
+      - name: Checkout cyberint-databricks
+        uses: actions/checkout@v4
+        with:
+          repository: apowis/pylint-issue
+          path: threat-intelligence
+
+      - name: Copy indicators to infobloxopen/threat-intelligence
+        run: |
+          cp -r pywordle/ ../threat-intelligence/lib/
+
+      - name: git add and commit new combined.csv
+        uses: EndBug/add-and-commit@v9
+        with:
+          message: ${{ github.event.inputs.commit_message }}
+          add: indicators/combined.csv
+          cwd: './threat-intelligence/'
