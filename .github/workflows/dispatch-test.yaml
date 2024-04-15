@@ -35,8 +35,10 @@ jobs:
           source-directory: 'pywordle/'
           # source-directory: 'indicators/'
           commit-message: ${{ github.event.inputs.commit_message }}
-          destination-github-username: 'infobloxopen'
-          destination-repository-name: 'threat-intelligence'
+          # destination-github-username: 'infobloxopen'
+          destination-github-username: 'apowis'
+          # destination-repository-name: 'threat-intelligence'
+          destination-repository-name: 'pylint-issue'
           target-branch: ${{ github.event.inputs.target_branch }}
           # target-directory: 'indicators/'
           target-directory: 'lib/'
