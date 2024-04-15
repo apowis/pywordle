@@ -32,11 +32,13 @@ jobs:
         env:
           SSH_DEPLOY_KEY: ${{ secrets.PYLINT_WRITE }}
         with:
-          source-directory: 'indicators/'
+          source-directory: 'pyworldle/'
+          # source-directory: 'indicators/'
           commit-message: ${{ github.event.inputs.commit_message }}
           destination-github-username: 'infobloxopen'
           destination-repository-name: 'threat-intelligence'
           target-branch: ${{ github.event.inputs.target_branch }}
-          target-directory: 'indicators/'
+          # target-directory: 'indicators/'
+          target-directory: 'lib/'
           user-email: apowis@infoblox.com
           create-target-branch-if-needed: true
