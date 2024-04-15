@@ -26,32 +26,16 @@ jobs:
           repository: apowis/pylint-issue
           path: threat-intelligence
 
-      # - name: Copy indicators to infobloxopen/threat-intelligence
-      #   run: echo 'yay' > threat-intelligence/temp.txt
-      #     ls -l
-      #     pwd
-      #     ls -l ..
-      #     cp -r pywordle/ threat-intelligence/lib/
 
-      # - uses: EndBug/add-and-commit@v9
-      #   with:
-      #     cwd: './threat-intelligence/'
-      #     add: 'temp.txt'
-      #     message: '${{ github.event.inputs.commit_message }}'
-      #     new_branch: ${{ github.event.inputs.target_branch }}
-      #     default_author: github_actor
-      #     push: false
-
-      - name: Pushes to another repository
+      - name: Copies indicators folder to infobloxopen/threat-intelligence
         uses: cpina/github-action-push-to-another-repository@main
         env:
           SSH_DEPLOY_KEY: ${{ secrets.PYLINT_WRITE }}
-        #   API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
         with:
-          source-directory: 'pywordle/'
+          source-directory: 'indicators/'
           commit-message: ${{ github.event.inputs.commit_message }}
-          destination-github-username: 'apowis'
-          destination-repository-name: 'pylint-issue'
+          destination-github-username: 'infobloxopen'
+          destination-repository-name: 'threat-intelligence'
           target-branch: ${{ github.event.inputs.target_branch }}
-          user-email: a.powis.91@gmail.com
+          target-directory: 'indicators/'
           create-target-branch-if-needed: true
