@@ -42,5 +42,4 @@ jobs:
           target-branch: ${{ github.event.inputs.target_branch }}
           # target-directory: 'indicators/'
           target-directory: 'lib/'
-          user-email: apowis@infoblox.com
           create-target-branch-if-needed: true
