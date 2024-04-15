@@ -32,7 +32,7 @@ jobs:
         env:
           SSH_DEPLOY_KEY: ${{ secrets.PYLINT_WRITE }}
         with:
-          source-directory: 'pyworldle/'
+          source-directory: 'pywordle/'
           # source-directory: 'indicators/'
           commit-message: ${{ github.event.inputs.commit_message }}
           destination-github-username: 'infobloxopen'
